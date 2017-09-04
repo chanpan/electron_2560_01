@@ -1,5 +1,5 @@
 const electron = require("electron");
-const {app, BrowserWindow} = electron;
+const {app, BrowserWindow,ipcMain} = electron;
 
 let mainWin="";
 let childWin="";
@@ -14,3 +14,7 @@ exports.openWindow = (filename) =>{
 	childWin = new BrowserWindow({ width:800, height:400, parent: mainWin, modal: false }); 
 	childWin.loadURL(`file://${__dirname}/${filename}.html`);
 }
+
+ipcMain.on('async', (event,arg)=>{
+	 console.log(arg);
+});
