@@ -6,6 +6,6 @@ button.textContent = "About";
 button.addEventListener('click',()=>{
     var window = remote.getCurrentWindow();
     main.openWindow('about');
-    window.close();
+    //window.close();
 },false);
 document.body.appendChild(button);
