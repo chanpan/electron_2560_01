@@ -7,8 +7,16 @@ let childWin="";
 app.on("ready", ()=>{
 	mainWin = new BrowserWindow({ width:1200, height:600});
 	mainWin.loadURL(`file://${__dirname}/index.html`);
-	mainWin.on('closed', function () { win = null; });
+	app.on('closed', function () { mainWin = null; app.exit() });
 });
+app.on('window-all-closed', () => {
+  // On macOS it is common for applications and their menu bar
+  // to stay active until the user quits explicitly with Cmd + Q
+  if (process.platform !== 'darwin') {
+    app.quit()
+  }
+})
+
 
 exports.openWindow = (filename) =>{
 	childWin = new BrowserWindow({ width:800, height:400, parent: mainWin, modal: false }); 
